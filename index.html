@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>8/3 Pixel</title>
+
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+background:black;
+overflow:hidden;
+color:#ff2b6a;
+font-family:'VT323', monospace;
+}
+
+canvas{
+position:absolute;
+top:0;
+left:0;
+}
+
+.center{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+}
+
+
+.heart{
+font-size:360px;
+}
+
+.line{
+font-size:120px;
+display:none;
+margin-top:90px;
+letter-spacing:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="center">
+
+<div id="heart" class="heart">❤</div>
+
+<div id="l1" class="line">8 / 3</div>
+<div id="l2" class="line">LUÔN LÀ NGƯỜI PHỤ NỮ</div>
+<div id="l3" class="line">XINH ĐẸP NHẤT</div>
+<div id="l4" class="line">HẠNH PHÚC NHẤT</div>
+<div id="l5" class="line">ĐỐI VỚI TAO</div>
+
+</div>
+
+<script>
+
+let canvas=document.getElementById("matrix");
+let ctx=canvas.getContext("2d");
+
+canvas.height=window.innerHeight;
+canvas.width=window.innerWidth;
+
+let letters="01❤".split("");
+
+let fontSize=16;
+let columns=canvas.width/fontSize;
+
+let drops=[];
+
+for(let x=0;x<columns;x++)
+drops[x]=1;
+
+function draw(){
+
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#ff2b6a";
+ctx.font=fontSize+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+
+let text=letters[Math.floor(Math.random()*letters.length)];
+
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+
+if(drops[i]*fontSize>canvas.height && Math.random()>0.975)
+drops[i]=0;
+
+drops[i]++;
+
+}
+
+}
+
+setInterval(draw,33);
+
+
+/* animation */
+
+setTimeout(()=>{
+document.getElementById("heart").style.display="none"
+document.getElementById("l1").style.display="block"
+},3000)
+
+setTimeout(()=>{
+document.getElementById("l1").style.display="none"
+document.getElementById("l2").style.display="block"
+},6000)
+
+setTimeout(()=>{
+document.getElementById("l2").style.display="none"
+document.getElementById("l3").style.display="block"
+},9000)
+
+setTimeout(()=>{
+document.getElementById("l3").style.display="none"
+document.getElementById("l4").style.display="block"
+},12000)
+
+setTimeout(()=>{
+document.getElementById("l4").style.display="none"
+document.getElementById("l5").style.display="block"
+},15000)
+
+</script>
+
+</body>
+</html>
